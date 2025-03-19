@@ -5,6 +5,8 @@ var uglify = require("gulp-uglify");
 
 var clean = require("gulp-clean");
 
+var browsersync = require("browser-sync").create();
+
 gulp.task("clean-scripts", function () {
   return gulp.src("dist/", { read: false, allowEmpty: true }).pipe(clean());
 });
@@ -32,11 +34,31 @@ gulp.task("html", function () {
 
 // Watch task: watch SCSS and JS files for changes
 gulp.task("watch", function () {
-  gulp.watch("src/js/**/*.js", gulp.series("js"));
+  browsersync.init({
+    server: {
+      baseDir: "./dist",
+    },
+  });
+
+  gulp
+    .watch("src/js/**/*.js", gulp.series("js"))
+    .on("change", browsersync.reload);
+
+  gulp
+    .watch("src/css/**/*.css", gulp.series("css"))
+    .on("change", browsersync.reload);
+
+  gulp
+    .watch("src/html/**/*.html", gulp.series("html"))
+    .on("change", browsersync.reload);
+
+  gulp
+    .watch("src/index.html", gulp.series(["index"]))
+    .on("change", browsersync.reload);
 });
 
 // Default task
 gulp.task(
   "default",
-  gulp.series("clean-scripts", "css", "js", "html", "index")
+  gulp.series("watch", "clean-scripts", "css", "js", "html", "index")
 );
