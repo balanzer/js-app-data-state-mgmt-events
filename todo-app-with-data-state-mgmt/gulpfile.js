@@ -20,7 +20,7 @@ gulp.task("copy-html", function () {
   return gulp.src(paths.pages).pipe(gulp.dest("dist"));
 });
 gulp.task(
-  "build",
+  "js-build",
   gulp.series(gulp.parallel("copy-html"), function () {
     return browserify({
       basedir: ".",
@@ -40,13 +40,25 @@ gulp.task(
   })
 );
 
+const injectHTML = require("gulp-inject-in-html");
+gulp.task("inject-in-html", function () {
+  return gulp.src("dist/**/*.html").pipe(injectHTML()).pipe(gulp.dest("dist/"));
+});
+
 var browserSync = require("browser-sync").create();
+var reload = browserSync.reload;
 gulp.task("browser-sync", function () {
   browserSync.init({
     server: {
       baseDir: "dist",
     },
   });
+
+  gulp.watch("./src/**/*.html", gulp.series(["build"])).on("change", reload);
+  gulp.watch("./src/**/*.css", gulp.series(["build"])).on("change", reload);
+  gulp.watch("./src/**/*.ts", gulp.series(["build"])).on("change", reload);
 });
 
-gulp.task("default", gulp.series("clean-scripts", "build"));
+gulp.task("build", gulp.series("clean-scripts", "js-build", "inject-in-html"));
+
+gulp.task("default", gulp.series("build", "browser-sync"));

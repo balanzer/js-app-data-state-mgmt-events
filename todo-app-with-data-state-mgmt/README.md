@@ -1,5 +1,11 @@
-# js-app-data-state-mgmt-events
+## Clean install project
 
-JS app with todo and reminders features, adding redux state management and basic data layer
+npm ci
 
-project setup info under `js-datalayer-demo-project/README.md`
+## Install
+
+npm install
+
+## GULP Build
+
+`gulp` - default build and starts browser at http://localhost:3000/
