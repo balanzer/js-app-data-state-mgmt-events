@@ -1,4 +1,5 @@
 export class Logger {
+  name: string;
   constructor(module) {
     this.name = module;
   }
