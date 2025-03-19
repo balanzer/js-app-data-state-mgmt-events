@@ -1,4 +1,5 @@
 var gulp = require("gulp");
+var series = require("gulp");
 var browserify = require("browserify");
 var source = require("vinyl-source-stream");
 var terser = require("gulp-terser");
@@ -8,11 +9,18 @@ var buffer = require("vinyl-buffer");
 var paths = {
   pages: ["src/**/*.html", "src/**/*.css"],
 };
+
+var clean = require("gulp-clean");
+
+gulp.task("clean-scripts", function () {
+  return gulp.src("./dist/", { read: false }).pipe(clean());
+});
+
 gulp.task("copy-html", function () {
   return gulp.src(paths.pages).pipe(gulp.dest("dist"));
 });
 gulp.task(
-  "default",
+  "build",
   gulp.series(gulp.parallel("copy-html"), function () {
     return browserify({
       basedir: ".",
@@ -40,3 +48,5 @@ gulp.task("browser-sync", function () {
     },
   });
 });
+
+gulp.task("default", gulp.series("clean-scripts", "build"));
