@@ -32,6 +32,12 @@ gulp.task("html", function () {
   return gulp.src(["src/html/**/*.html"]).pipe(gulp.dest("dist/html"));
 });
 
+const injectHTML = require("gulp-inject-in-html");
+
+gulp.task("inject-in-html", function () {
+  return gulp.src("dist/**/*.html").pipe(injectHTML()).pipe(gulp.dest("dist/"));
+});
+
 // Watch task: watch SCSS and JS files for changes
 gulp.task("watch", function () {
   browsersync.init({
@@ -60,5 +66,13 @@ gulp.task("watch", function () {
 // Default task
 gulp.task(
   "default",
-  gulp.series("watch", "clean-scripts", "css", "js", "html", "index")
+  gulp.series(
+    "watch",
+    "clean-scripts",
+    "css",
+    "js",
+    "html",
+    "index",
+    "inject-in-html"
+  )
 );
