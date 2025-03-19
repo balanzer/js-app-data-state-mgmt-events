@@ -67,7 +67,7 @@ gulp.task("watch", function () {
 gulp.task(
   "default",
   gulp.series(
-    "watch",
+    // "watch",
     "clean-scripts",
     "css",
     "js",
