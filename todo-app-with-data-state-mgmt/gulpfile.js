@@ -52,6 +52,7 @@ gulp.task("browser-sync", function () {
     server: {
       baseDir: "dist",
     },
+    reloadDelay: 1000,
   });
 
   gulp.watch("./src/**/*.html", gulp.series(["build"])).on("change", reload);
