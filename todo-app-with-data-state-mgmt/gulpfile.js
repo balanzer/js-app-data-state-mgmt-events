@@ -52,7 +52,7 @@ gulp.task("browser-sync", function () {
     server: {
       baseDir: "./dist",
     },
-    reloadDelay: 500,
+    reloadDelay: 1500,
   });
 
   gulp.watch("./src/**/*.html", gulp.series(["build"])).on("change", reload);
