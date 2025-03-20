@@ -19,6 +19,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser": "^2.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "miragejs": "^0.1.48",
     "tsify": "^5.0.4",
     "typescript": "^5.8.2",
     "vinyl-buffer": "^1.0.1",
