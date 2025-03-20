@@ -1,1 +1,15 @@
-body {background-color: rgb(246, 240, 238);}
+body {
+  background-color: rgb(246, 240, 238);
+}
+
+.scrollable-element {
+  height: 400px;
+  overflow: auto;
+}
+
+.app-padding {
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+}

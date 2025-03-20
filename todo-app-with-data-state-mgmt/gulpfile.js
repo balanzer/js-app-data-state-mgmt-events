@@ -50,9 +50,9 @@ var reload = browserSync.reload;
 gulp.task("browser-sync", function () {
   browserSync.init({
     server: {
-      baseDir: "dist",
+      baseDir: "./dist",
     },
-    reloadDelay: 1000,
+    reloadDelay: 500,
   });
 
   gulp.watch("./src/**/*.html", gulp.series(["build"])).on("change", reload);

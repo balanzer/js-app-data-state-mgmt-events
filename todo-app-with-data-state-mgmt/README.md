@@ -8,4 +8,4 @@ npm install
 
 ## GULP Build
 
-`gulp` - default build and starts browser at http://localhost:3000/
+run `gulp` - default build and starts browser at http://localhost:3000/
